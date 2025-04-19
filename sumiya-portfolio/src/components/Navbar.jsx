@@ -7,6 +7,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
+    // Check local storage or user preference on initial load
     const savedTheme = localStorage.getItem('theme');
     return savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
   });
@@ -31,7 +32,7 @@ const Navbar = () => {
     }
   }, [darkMode]);
 
-  // Handle scroll events (for mobile view)
+  // Handle scroll events
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -53,68 +54,15 @@ const Navbar = () => {
   }, [location]);
 
   const navLinks = [
-    { name: 'Home', path: '/', icon: <FaHome size={20} /> },
-    { name: 'About', path: '/about', icon: <FaUser size={20} /> },
-    { name: 'Skills', path: '/skills', icon: <FaCode size={20} /> },
-    { name: 'Education', path: '/education', icon: <FaGraduationCap size={20} /> },
-    { name: 'Projects', path: '/projects', icon: <FaBriefcase size={20} /> },
-    { name: 'Contact', path: '/contact', icon: <FaEnvelope size={20} /> },
+    { name: 'Home', path: '/', icon: <FaHome /> },
+    { name: 'About', path: '/about', icon: <FaUser /> },
+    { name: 'Skills', path: '/skills', icon: <FaCode /> },
+    { name: 'Education', path: '/education', icon: <FaGraduationCap /> },
+    { name: 'Projects', path: '/projects', icon: <FaBriefcase /> },
+    { name: 'Contact', path: '/contact', icon: <FaEnvelope /> },
   ];
 
-  // Desktop Sidebar
-  const SidebarNav = () => (
-    <div className="fixed left-0 top-0 h-full w-64 bg-white dark:bg-slate-900 shadow-lg flex flex-col z-50">
-      {/* Logo */}
-      <div className="p-6">
-        <Link to="/" className="text-2xl font-bold flex items-center">
-          <span className="text-teal-500 dark:text-teal-400">Sumiya</span>
-          <span className="text-slate-800 dark:text-white">.dev</span>
-        </Link>
-      </div>
-      
-      {/* Nav Links */}
-      <div className="flex-1 flex flex-col justify-center space-y-2 px-4">
-        {navLinks.map((link, index) => (
-          <Link
-            key={index}
-            to={link.path}
-            className={`flex items-center space-x-4 p-3 rounded-lg transition-all duration-300 ${
-              location.pathname === link.path
-                ? 'bg-teal-50 dark:bg-slate-800 text-teal-600 dark:text-teal-400 font-semibold'
-                : 'text-slate-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-teal-600 dark:hover:text-teal-400'
-            }`}
-          >
-            <span>{link.icon}</span>
-            <span>{link.name}</span>
-          </Link>
-        ))}
-      </div>
-      
-      {/* Bottom Section */}
-      <div className="p-6 space-y-4">
-        {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="w-full flex items-center justify-center space-x-2 p-3 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors duration-300"
-          aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-        >
-          {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
-          <span>{darkMode ? "Light Mode" : "Dark Mode"}</span>
-        </button>
-        
-        {/* Resume Button */}
-        <Link 
-          to="/resume"
-          className="w-full flex items-center justify-center p-3 bg-teal-500 hover:bg-teal-600 text-white rounded-lg transition-all duration-300"
-        >
-          Resume
-        </Link>
-      </div>
-    </div>
-  );
-
-  // Mobile Navbar
-  const MobileNav = () => (
+  return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
       scrolled 
         ? 'bg-white dark:bg-slate-900 shadow-lg' 
@@ -128,8 +76,44 @@ const Navbar = () => {
             <span className="text-slate-800 dark:text-white">.dev</span>
           </Link>
 
-          {/* Mobile Menu Button and Theme Toggle */}
-          <div className="flex items-center space-x-3">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-8">
+            {navLinks.map((link, index) => (
+              <Link
+                key={index}
+                to={link.path}
+                className={`flex items-center space-x-1 ${
+                  location.pathname === link.path
+                    ? 'text-teal-600 dark:text-teal-400 font-semibold'
+                    : 'text-slate-700 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors duration-300'
+                }`}
+              >
+                <span className="text-sm">{link.icon}</span>
+                <span>{link.name}</span>
+              </Link>
+            ))}
+          </div>
+
+          {/* Theme Toggle and Resume Button */}
+          <div className="hidden md:flex items-center space-x-4">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-gray-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors duration-300"
+              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
+            </button>
+            
+            <Link 
+              to="/resume"
+              className="bg-teal-500 hover:bg-teal-600 text-white px-5 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
+            >
+              Resume
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center space-x-3">
             <button
               onClick={toggleTheme}
               className="p-2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-gray-300"
@@ -147,9 +131,9 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown */}
+        {/* Mobile Menu */}
         <div
-          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
             isOpen ? 'max-h-screen opacity-100 py-4' : 'max-h-0 opacity-0'
           }`}
         >
@@ -178,20 +162,6 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  );
-
-  return (
-    <>
-      {/* Desktop Sidebar (hidden on mobile) */}
-      <div className="hidden md:block">
-        <SidebarNav />
-      </div>
-
-      {/* Mobile Navbar (hidden on desktop) */}
-      <div className="md:hidden">
-        <MobileNav />
-      </div>
-    </>
   );
 };
 

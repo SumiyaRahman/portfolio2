@@ -96,11 +96,12 @@ const Banner = () => {
               className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6"
             >
               <motion.button
+                onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-teal-500 to-teal-400 rounded-full text-white font-semibold hover:shadow-lg transition-all duration-300"
               >
-                Resume
+                Get in Touch
               </motion.button>
 
               <div className="flex gap-4 mt-4 sm:mt-0">

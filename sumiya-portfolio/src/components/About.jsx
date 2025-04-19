@@ -158,11 +158,11 @@ const About = () => {
                 </div>
 
                 {/* Enhanced Bottom Decorative Element */}
-                <div className="mt-16 flex justify-center relative">
+                {/* <div className="mt-16 flex justify-center relative">
                     <div className="w-32 h-1 bg-gradient-to-r from-teal-500 to-teal-400 dark:from-teal-400 dark:to-teal-300 rounded-full">
                         <div className="absolute left-1/2 -translate-x-1/2 -bottom-2 w-4 h-4 bg-teal-500 dark:bg-teal-400 rounded-full animate-bounce"></div>
                     </div>
-                </div>
+                </div> */}
             </motion.div>
         </div>
     );

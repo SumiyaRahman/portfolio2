@@ -126,7 +126,7 @@ const Projects = () => {
 
                   {/* View Details Button */}
                   <Link
-                    to={`/project/${project._id}`}
+                    to={`project/${project._id}`}
                     className="inline-flex items-center justify-center w-full py-3 px-4
                              bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500
                              text-white rounded-xl font-medium text-sm

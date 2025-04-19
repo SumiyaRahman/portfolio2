@@ -8,11 +8,22 @@ import Skills from '../components/admin/adminComponent/Skills';
 import EducationalQualification from '../components/admin/adminComponent/EducationalQualification';
 import Achievement from '../components/admin/adminComponent/Achievement';
 import Project from '../components/admin/adminComponent/Project';
-import About from '../components/About';
+import Home from '../pages/Home';
+import ViewDetails from '../pages/ViewDetails';
 const router = createBrowserRouter([
     {
       path: "/",
       element: <MainLayout />,
+      children: [
+        {
+          path: "/",
+          element: <Home></Home>,
+        },
+        {
+          path: "project/:id",
+          element: <ViewDetails></ViewDetails>,
+        }
+      ],
     },
     {
         path: "admin/dashboard",

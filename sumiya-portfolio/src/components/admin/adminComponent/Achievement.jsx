@@ -17,14 +17,14 @@ const Achievement = () => {
     const { data: achievements = [], isLoading } = useQuery({
         queryKey: ['achievements'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/achievements');
+            const res = await axios.get('https://official-portfolio-server.vercel.app/achievements');
             return res.data;
         }
     });
 
     const addMutation = useMutation({
         mutationFn: async (newAchievement) => {
-            return axios.post('http://localhost:5000/achievements', newAchievement);
+            return axios.post('https://official-portfolio-server.vercel.app/achievements', newAchievement);
         },
         onSuccess: () => {
             queryClient.invalidateQueries(['achievements']);
@@ -35,7 +35,7 @@ const Achievement = () => {
 
     const updateMutation = useMutation({
         mutationFn: async (achievement) => {
-            return axios.put(`http://localhost:5000/achievements/${achievement._id}`, achievement);
+            return axios.put(`https://official-portfolio-server.vercel.app/achievements/${achievement._id}`, achievement);
         },
         onSuccess: () => {
             queryClient.invalidateQueries(['achievements']);
@@ -47,7 +47,7 @@ const Achievement = () => {
 
     const deleteMutation = useMutation({
         mutationFn: async (id) => {
-            return axios.delete(`http://localhost:5000/achievements/${id}`);
+            return axios.delete(`https://official-portfolio-server.vercel.app/achievements/${id}`);
         },
         onSuccess: () => {
             queryClient.invalidateQueries(['achievements']);

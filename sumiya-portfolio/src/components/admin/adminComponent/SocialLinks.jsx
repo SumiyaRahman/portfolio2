@@ -20,7 +20,7 @@ const SocialLinks = () => {
     const { data: socialLinksData, refetch } = useQuery({
         queryKey: ['socialLinks'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/social-links');
+            const res = await axios.get('https://official-portfolio-server.vercel.app/social-links');
             return res.data;
         }
     });
@@ -36,7 +36,7 @@ const SocialLinks = () => {
         e.preventDefault();
         
         try {
-            await axios.post('http://localhost:5000/social-links', newLink);
+            await axios.post('https://official-portfolio-server.vercel.app/social-links', newLink);
             setIsModalOpen(false);
             setNewLink({ name: '', url: '', logo: '' });
             refetch();
@@ -47,7 +47,7 @@ const SocialLinks = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/social-links/${id}`);
+            await axios.delete(`https://official-portfolio-server.vercel.app/social-links/${id}`);
             refetch();
         } catch (error) {
             console.error('Error deleting social link:', error);

@@ -12,7 +12,7 @@ const BannerIntro = () => {
     const { data: bannerIntroData, refetch } = useQuery({
         queryKey: ['bannerIntro'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/banner-intro');
+            const res = await axios.get('https://official-portfolio-server.vercel.app/banner-intro');
             return res.data;
         }
     });
@@ -62,7 +62,7 @@ const BannerIntro = () => {
         try {
             if (bannerIntroData?.length > 0) {
                 const response = await axios.patch(
-                    `http://localhost:5000/banner-intro/${bannerIntroData[0]._id}`,
+                    `https://official-portfolio-server.vercel.app/banner-intro/${bannerIntroData[0]._id}`,
                     updateData
                 );
                 
@@ -71,7 +71,7 @@ const BannerIntro = () => {
                     setIsModalOpen(false);
                 }
             } else {
-                await axios.post('http://localhost:5000/banner-intro', updateData);
+                await axios.post('https://official-portfolio-server.vercel.app/banner-intro', updateData);
                 refetch();
                 setIsModalOpen(false);
             }

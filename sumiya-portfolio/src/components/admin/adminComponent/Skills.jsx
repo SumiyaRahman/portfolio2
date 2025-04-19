@@ -11,7 +11,7 @@ const Skills = () => {
     const { data: skillsData, refetch } = useQuery({
         queryKey: ['skills'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/skills');
+            const res = await axios.get('https://official-portfolio-server.vercel.app/skills');
             return res.data;
         }
     });
@@ -24,7 +24,7 @@ const Skills = () => {
         try {
             setLoading(true);
             const response = await axios.post(
-                `http://localhost:5000/upload-image`,
+                `https://official-portfolio-server.vercel.app/upload-image`,
                 formData,
                 {
                     params: {
@@ -52,7 +52,7 @@ const Skills = () => {
         };
 
         try {
-            await axios.post('http://localhost:5000/skills', skillData);
+            await axios.post('https://official-portfolio-server.vercel.app/skills', skillData);
             setIsModalOpen(false);
             setSkillName('');
             setSkillLogo('');

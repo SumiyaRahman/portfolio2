@@ -12,7 +12,7 @@ const EducationalQualification = () => {
     const { data: educationData, refetch } = useQuery({
         queryKey: ['education'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/educational-qualification');
+            const res = await axios.get('https://official-portfolio-server.vercel.app/educational-qualification');
             return res.data;
         }
     });
@@ -28,7 +28,7 @@ const EducationalQualification = () => {
         };
 
         try {
-            await axios.post('http://localhost:5000/educational-qualification', educationData);
+            await axios.post('https://official-portfolio-server.vercel.app/educational-qualification', educationData);
             setIsModalOpen(false);
             refetch();
             setInstituteName('');
